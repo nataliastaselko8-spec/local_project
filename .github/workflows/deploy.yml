@@ -17,8 +17,8 @@ jobs:
       - name: Install Wrangler
         run: npm install -g wrangler
 
-      - name: Deploy DEV (Account A)
-        run: wrangler pages deploy . --project-name=YOUR_DEV_PROJECT
+      - name: Deploy DEV
+        run: wrangler pages deploy . --project-name=local-site-dev
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN_DEV }}
 
@@ -32,7 +32,7 @@ jobs:
       - name: Install Wrangler
         run: npm install -g wrangler
 
-      - name: Deploy PROD (Account B)
-        run: wrangler pages deploy . --project-name=YOUR_PROD_PROJECT
+      - name: Deploy PROD
+        run: wrangler pages deploy . --project-name=local-site
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN_PROD }}

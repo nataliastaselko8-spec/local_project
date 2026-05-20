@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>I18N Demo</title>
+</head>
+<body>
+
+  <h1 id="hello">Loading...</h1>
+
+  <label id="label"></label>
+
+  <select id="lang">
+    <option value="en">English</option>
+    <option value="ru">Русский</option>
+    <option value="de">Deutsch</option>
+    <option value="fr">Français</option>
+  </select>
+
+<script>
+const API = "https://YOUR-WORKER.workers.dev/api/locale"
+
+async function loadLang(lang) {
+  const res = await fetch(`${API}?lang=${lang}`)
+  const data = await res.json()
+
+  document.getElementById("hello").innerText = data.hello
+  document.getElementById("label").innerText = data.select_language
+}
+
+document.getElementById("lang").addEventListener("change", (e) => {
+  const lang = e.target.value
+  loadLang(lang)
+  localStorage.setItem("lang", lang)
+})
+
+// init
+const saved = localStorage.getItem("lang") || "en"
+document.getElementById("lang").value = saved
+loadLang(saved)
+</script>
+
+</body>
+</html>
